@@ -1,0 +1,5 @@
+.env
+README.md
+__*
+*.pyc
+*.pyo
