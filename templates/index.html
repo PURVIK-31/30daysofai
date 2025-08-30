@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>30 Days of AI - Day 1</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <title>30 Days of AI - Day 26</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}?v=day26-1">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header class="header">
             <h1 class="title">30 Days of AI</h1>
-            <p class="subtitle">Day 1: Project Setup</p>
+            <p class="subtitle">Day 27: Revamp UI and Code Cleanup</p>
+            <div class="header-actions">
+                <button id="open-settings" class="btn btn-outline">Settings</button>
+            </div>
         </header>
 
         <main class="main-content">
             <div class="card">
                 <div class="status-section">
-                    <div id="status-indicator" class="status-indicator">
-                        <span class="status-dot"></span>
-                        <span class="status-text">Checking...</span>
+                    <div class="chat-header">
+                        <div id="status-indicator" class="status-indicator">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Checking...</span>
+                        </div>
+                        <div class="controls">
+                            <span id="session-info" class="session-badge">Session: ...</span>
+                            <button id="new-session" class="btn btn-outline">New conversation</button>
+                        </div>
                     </div>
                 </div>
 
@@ -29,24 +38,37 @@
                     </div>
                 </div>
 
-                <!-- Day 3: TTS Generator UI -->
-                <div class="tts-section">
-                    <h2 class="tts-title">Text-to-Speech</h2>
-                    <div class="tts-form">
-                        <input type="text" id="tts-input" placeholder="Enter text to synthesize" />
-                        <button id="tts-submit">Generate Audio</button>
+                <!-- Day 24: Persona Selection Panel -->
+                <div class="persona-section">
+                    <h2 class="persona-title">Choose Your AI Persona</h2>
+                    <div id="persona-grid" class="persona-grid">
+                        <p>Loading personas...</p>
                     </div>
-                    <audio id="tts-audio" controls style="display:none; width:100%; margin-top:1rem;"></audio>
+                    <div id="current-persona" class="current-persona">
+                        <span class="persona-avatar">🤖</span>
+                        <div class="persona-info">
+                            <strong>ARIA-7</strong>
+                            <p>An advanced AI robot assistant from the future</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Day 4: Echo Bot UI -->
-                <div class="echo-section">
-                    <h1 class="echo-title">Echo Bot</h1>
-                    <div class="echo-controls">
-                        <button id="start-recording">Start Recording</button>
-                        <button id="stop-recording" disabled>Stop Recording</button>
+                <!-- Chat History Panel -->
+                <div class="chat-section">
+                    <h2 class="tts-title">Chat History</h2>
+                    <div id="chat-history" class="chat-history">
+                        <em>No messages yet...</em>
                     </div>
-                    <audio id="echo-audio" controls style="display:none; width:100%; margin-top:1rem;"></audio>
+                </div>
+
+                <!-- Day 12: Single toggle record button for the agent -->
+                <div class="record-section" style="margin-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                    <button id="record-toggle" class="btn btn-primary" style="width:72px; height:72px; border-radius:9999px; display:inline-flex; align-items:center; justify-content:center;">
+                        <span class="dot"></span>
+                        <span class="label">Start</span>
+                    </button>
+                    <div id="record-status" class="status-note">Tap to speak</div>
+                    <audio id="agent-audio" style="display:none; width:100%;"></audio>
                 </div>
 
             </div>
@@ -57,6 +79,48 @@
         </footer>
     </div>
 
-    <script src="{{ url_for('static', path='/js/app.js') }}"></script>
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Configuration</h3>
+                <button id="close-settings" class="btn btn-icon" aria-label="Close">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>Enter your API keys. These are stored locally in-memory on the server for this session and not persisted to disk.</p>
+                <form id="settings-form">
+                    <div class="form-row">
+                        <label>Gemini API Key</label>
+                        <input type="password" id="key-gemini" placeholder="AIza..." />
+                    </div>
+                    <div class="form-row">
+                        <label>AssemblyAI API Key</label>
+                        <input type="password" id="key-assemblyai" placeholder="..." />
+                    </div>
+                    <div class="form-row">
+                        <label>Murf API Key</label>
+                        <input type="password" id="key-murf" placeholder="..." />
+                    </div>
+                    <div class="form-row">
+                        <label>Tavily API Key</label>
+                        <input type="password" id="key-tavily" placeholder="tvly-..." />
+                    </div>
+                    <div class="form-row">
+                        <label>Gemini Model</label>
+                        <input type="text" id="model-gemini" placeholder="gemini-1.5-flash" />
+                    </div>
+                    <div class="form-row">
+                        <label>Murf Voice ID</label>
+                        <input type="text" id="murf-voice-id" placeholder="en-US-terrell" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', path='/js/app.js') }}?v=day27-1"></script>
 </body>
-</html> 
+</html>

@@ -1,5 +1,15 @@
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-python-multipart==0.0.6
-requests==2.31.0
-python-dotenv==1.0.0 
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+python-dotenv==1.0.1
+requests==2.32.3
+pydantic==2.7.1
+Jinja2==3.1.4
+python-multipart==0.0.9
+# Allow newer AssemblyAI SDKs with universal streaming support
+assemblyai>=0.36.0
+# Align Starlette with FastAPI 0.110.0 requirements (>=0.36.3,<0.37.0)
+starlette==0.36.3
+# Day 20: WebSocket client for Murf TTS integration
+websockets==12.0
+# Day 25: Web search capability with Tavily (using REST API directly)
+# tavily-python==0.3.7  # Commented out due to heavy dependencies
