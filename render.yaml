@@ -2,7 +2,6 @@ services:
   - type: web
     name: 30daysofai
     runtime: python
-    pythonVersion: 3.11.9
     plan: free
     buildCommand: |
       pip install --upgrade pip
